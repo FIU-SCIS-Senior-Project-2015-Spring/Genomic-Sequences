@@ -1,0 +1,5 @@
+<!--about us page in index.php-->
+<div>
+	<h2 class="text-center">About Section</h2>
+	<div class="text-center">this is a project from FIU</div>
+</div>

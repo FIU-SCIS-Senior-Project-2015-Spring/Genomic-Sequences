@@ -2,31 +2,31 @@
 <div class="row">
 	<center>  
 		<div class="col-md-1"></div>   <!-- Do Not delete, left blank Intentionally -->
-		<div class="col-md-5">
-			<form class="form-signin" id="login-form" ng-submit="login()">
-			<h2 class="form-signin-heading">Please log in</h2>
-				<input ng-model= "email" type ="text" placeholder ="Email Address" class="form-control" required autofocus>
-				<input ng-model= "password" type ="password" placeholder ="Password" class="form-control" required>
+			<div class="col-md-5">
+				<form class="form-signin" id="login-form" ng-submit="login()">
+					<h2 class="form-signin-heading">Please log in</h2>
+					<input ng-model= "email" type ="text" placeholder ="Email Address" class="form-control" required autofocus>
+					<input ng-model= "password" type ="password" placeholder ="Password" class="form-control" required>
 
 					<!-- NEED TO IMPLEMENT THE BELOW FOR THE FORGET PASSWORD-->
 					<label>
 						<a href="#home" class="forget" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>
 					</label>
 
-				<button type="submit" class="btn btn-lg btn-primary btn-block">Log In</button>
-			</form>
-		</div> <!-- col-mid-5 -->
+					<button type="submit" class="btn btn-lg btn-primary btn-block">Log In</button>
+				</form>
+			</div> <!-- col-mid-5 -->
 		
-		<!-- this is the registration section -->
-		<div class="col-md-5">
-			<form class="form-signin" ng-submit="register()">
-				<p id="registerParagraph">New to GnomePro?<br>Register now to get your own profile</p>
-				<button class="btn btn-lg btn-primary btn-block" id="registerbnt" type="submit">Register</button>
-			</form>
-		</div>
-		<div class="col-md-1"></div>  <!-- Do Not delete, left blank Intentionally  -->
-	</center>
-</div> <!-- end of row-->
+			<!-- this is the registration section -->
+			<div class="col-md-5">
+				<form class="form-signin" ng-submit="register()">
+					<p id="registerParagraph">New to GnomePro?<br>Register now to get your own profile</p>
+					<button class="btn btn-lg btn-primary btn-block" id="registerbnt" type="submit">Register</button>
+				</form>
+			</div>
+			<div class="col-md-1"></div>  <!-- Do Not delete, left blank Intentionally  -->
+				</center>
+		</div> <!-- end of row-->
 
 <!-- Below is hidden, only shown when forgot password is clicked -->
 <div class="modal fade forget-modal" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true" id="myForgetModalLabel">

@@ -28,6 +28,17 @@
 	$confpass = md5($_POST['conf_password']);
 	$ver_code = md5($pass);
 
+	//check if user exist
+	$sql = "SELECT password,email, id, first_name, last_name FROM users WHERE email = '".strtolower($email)."'";
+	$userResource = pg_query($connectedDB, $sql);
+	$userResultData = pg_fetch_row($userResource); 
+	
+	//if the user exist throw an exception
+	if($userResultData != NULL)
+	{
+		throw new GeneralException('A user with that email already exist.', 002);
+	}
+
 	
 	//compare passwords to know they match
 	$passwordComparison = strcmp($pass, $confpass);

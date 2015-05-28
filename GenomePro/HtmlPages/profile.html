@@ -4,7 +4,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<h3 class="text-center">Welcome to your profile page</h3>
+					<h3 class="text-center">Welcome {{name}} to your profile page</h3>
 					</br>
 					<div class="row">
 						<!--profile photo image-->
@@ -75,27 +75,27 @@
 
 <!--change password modal-->
 <div class="modal fade" id="ChangePasswordModal">
-  <div class="modal-dialog">
-	<div class="modal-content">
-	  <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		<h4 class="modal-title">Change Password</h4>
-	  </div>
-	  <div class="modal-body">
-		  <div class="form-group">
-			<input type="Password" class="form-control" ng-model="theOldPassword" placeholder="Old Password">
-		  </div>
-		  <div class="form-group">
-			<input type="Password" class="form-control" ng-model="theNewPassword" placeholder="New Password">
-		  </div>
-		  <div class="form-group">
-			<input type="Password" class="form-control" ng-model="theNewTwoPassword" placeholder="Re-enter New Password">
-		  </div>
-	  </div>
-	  <div class="modal-footer">
-		<button type="button" class="btn btn-default" ng-click="ChangePassword()">Submit</button>
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	  </div>
-	</div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Change Password</h4>
+			</div>
+		  	<div class="modal-body">
+		  		<div class="form-group">
+					<input type="Password" class="form-control" ng-model="theOldPassword" placeholder="Old Password">
+		  		</div>
+		  		<div class="form-group">
+					<input type="Password" class="form-control" ng-model="theNewPassword" placeholder="New Password">
+		  		</div>
+		  		<div class="form-group">
+					<input type="Password" class="form-control" ng-model="theNewTwoPassword" placeholder="Re-enter New Password">
+		  		</div>
+	  		</div>
+	  		<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="ChangePassword()">Submit</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	  		</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->	

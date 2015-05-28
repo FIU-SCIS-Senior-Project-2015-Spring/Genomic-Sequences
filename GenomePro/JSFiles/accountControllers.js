@@ -23,6 +23,24 @@ GenomePro.config(['$routeProvider',function($routeProvider) {
 		});
 }]);
 
+
+GenomePro.factory('sessionRecoverer', ['$q', '$injector', function($q, $injector) {  
+	var sessionRecoverer = {
+	        responseError: function(response) {
+			$('#showAlertTitle').text("Error has occurred.");	
+			$('#showAlertText').text(response.data.ErrorMsg);
+			$('#showAlert').modal('show');
+		return $q.reject(response);
+		}
+	};
+	return sessionRecoverer;
+}]);
+
+GenomePro.config(['$httpProvider', function($httpProvider) {  
+	$httpProvider.interceptors.push('sessionRecoverer');
+}]);
+
+
 //this controller is for the navegation bar.
 GenomePro.controller('ControllerNavbar', function($scope, $location, $http) {
 
@@ -40,13 +58,23 @@ GenomePro.controller('ControllerNavbar', function($scope, $location, $http) {
 GenomePro.controller('profile', function($scope, $http, $location, $timeout) {
 
 	//varibles for input type tests in profile.hmtl 	
-	$scope.theName ="Yohan";
-	$scope.name = "Yohan";
+	$scope.theName ="";
+	$scope.name = "";
 	$scope.InputPassword = "Test";
 	$scope.theOldPassword ="";
 	$scope.theNewPassword="";
 	$scope.theNewTwoPassword="";
 	
+	//call progile information to get user first name and last name
+	$http.post("CORE/profile_information.php",
+	{
+
+	})
+	.success(function(json) {
+		$scope.name = json;
+	});
+	
+
 	//This is call when the select photo button is click on 
 	$scope.selectPhoto = function(){
 		
@@ -61,6 +89,7 @@ GenomePro.controller('profile', function($scope, $http, $location, $timeout) {
 	$scope.OpenChangeNameModal = function(){
 		
 		//this show the change name modal
+		$scope.theName = $scope.name;
 		$('#ChangeNameModal').modal('show');
 	}
 

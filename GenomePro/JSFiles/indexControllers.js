@@ -41,6 +41,24 @@ GenomePro.config(['$routeProvider',function($routeProvider) {
 		});
 }]);
 
+//
+GenomePro.factory('sessionRecoverer', ['$q', '$injector', function($q, $injector) {  
+	var sessionRecoverer = {
+	        responseError: function(response) {
+			$('#showAlertTitle').text("Error has occurred.");	
+			$('#showAlertText').text(response.data.ErrorMsg);
+			$('#showAlert').modal('show');
+		return $q.reject(response);
+        	}
+	};
+	return sessionRecoverer;
+}]);
+
+//
+GenomePro.config(['$httpProvider', function($httpProvider) {  
+	$httpProvider.interceptors.push('sessionRecoverer');
+}]);
+
 //this controller is for the navegation bar.
 GenomePro.controller('ControllerNavbar', function($scope, $location, $http) {
 

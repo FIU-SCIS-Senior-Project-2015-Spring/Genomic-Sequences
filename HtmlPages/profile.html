@@ -1,0 +1,140 @@
+<!--profile page in account.php-->
+<div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-default">
+                                <div class="panel-heading"><h3 class="text-center">Welcome {{name.first_name}} {{name.last_name}}</h3></div>
+				<div class="panel-body">
+					</br>
+                                        <form ng-submit="uploadPhoto()">
+                                                <div class="row">
+                                                        <!--profile photo image-->
+                                                        <div class="col-md-6">
+                                                                <div class="panel panel-default">
+                                                                        <div class="panel-body">
+                                                                                <img id="profile_image" ng-src="Images/{{name.id}}" style="max-width:100%;" class="img-thumbnail" alt="profile photo">
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <!--profile photo buttons-->
+                                                        <div class="col-md-6">
+                                                                <button type="file" ng-file-select="imageSelect($files)" accept="jpg, png, jpeg" class="btn btn-lg btn-primary btn-block" required>Select Photo</button>
+                                                                <button class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
+                                                        </div>
+                                                </div>
+                                        </form>
+
+					<div class="row">
+						<div class="col-md-12">
+							<form>
+								<!--profile change first name-->
+								<div class="form-group">
+									<label for="name">First Name</label>
+									<div class="input-group">
+										<input type="text" id="name" class="form-control" ng-model="name.first_name">
+										<span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="OpenChangeFirstNameModal()">Change</button></span>
+									</div>
+								</div>
+
+								<!--profile change last name-->
+								<div class="form-group">
+									<label for="name">Last Name</label>
+									<div class="input-group">
+										<input type="text" id="name" class="form-control" ng-model="name.last_name">
+										<span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="OpenChangeLastNameModal()">Change</button></span>
+									</div>
+								</div>
+
+								<!--profile change password-->
+								<div class="form-group">
+									<label for="InputPassword">Password</label>
+									<div class="input-group">
+										<input type="password" class="form-control" id="InputPassword" ng-model="InputPassword">
+										<span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="OpenChangePassModal()">Change</button></span>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--change first name modal-->
+<div class="modal fade" id="ChangeFirstNameModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Change First Name</h4>
+			</div>
+                    <form ng-submit="ChangeFirst()">
+			<div class="modal-body">
+				<div class="form-group">
+					<input type="text" class="form-control" ng-model="newFirstName" placeholder="New First Name" required>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-default" type="submit">Submit</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+                    </form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--change last name modal-->
+<div class="modal fade" id="ChangeLastNameModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Change Last Name</h4>
+			</div>
+                    <form ng-submit="ChangeLast()">
+			<div class="modal-body">
+				<div class="form-group">
+					<input type="text" class="form-control" ng-model="newLastName" placeholder="New Last Name" required>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-default" type="submit">Submit</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+                    </form>
+
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--change password modal-->
+<div class="modal fade" id="ChangePasswordModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Change Password</h4>
+			</div>
+                    <form ng-submit="ChangePassword()">
+		  	<div class="modal-body">
+		  		<div class="form-group">
+					<input type="Password" class="form-control" ng-model="currentPassword" placeholder="Current Password" required>
+		  		</div>
+		  		<div class="form-group">
+					<input type="Password" class="form-control" ng-model="newPassword" placeholder="New Password" required>
+		  		</div>
+		  		<div class="form-group">
+					<input type="Password" class="form-control" ng-model="newPasswordAgain" placeholder="Re-enter New Password" required>
+		  		</div>
+	  		</div>
+	  		<div class="modal-footer">
+                                <button class="btn btn-default" type="submit">Submit</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	  		</div>
+                    </form>
+
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->	

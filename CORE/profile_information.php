@@ -1,16 +1,15 @@
 <?php
-
 	//import general functions
 	require "functions.php";
 
 	//checking if user is logged in
 	session_start();
-	$userName = $_SESSION['user_name'];
-	if( is_null($userName)){
+	$userData = $_SESSION;
+        session_write_close();
+	if( is_null($userData)){
 		header('Location: http://localhost/GenomePro/index.php');
 		exit();
 	}
-
 	//return sent to client	
-	returnValue($userName);	
+	returnValue($userData);	
 ?>

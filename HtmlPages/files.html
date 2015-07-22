@@ -1,0 +1,148 @@
+<!--user tools page for data processing and analyzing-->
+<div class="container">
+        <h2>Genome Sequences Tools</h2>
+        <ul class="nav nav-tabs">
+            <li class="active"><a showtab=" " href="#repeated">Repeated Sequences</a></li>
+            <li><a showtab=" "  href="#datatype">Genome Data Type</a></li>
+            <li><a showtab=" " href="#probes">Genome Probes</a></li>
+            <li><a showtab=" " href="#differences">Genome Differences</a></li>
+        </ul>
+        <!-- here starts the content of each tab -->
+        <div class="tab-content">
+            <div id="repeated" class="tab-pane fade in active">
+                <h3>Repeated Sequences</h3>
+                <p>Choose a genome file and we will find the repeated sequences contained in that file.</p>
+                <!--find repeated sequences-->
+                <div>
+                        <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><h3 class="text-center">Repeated Sequences</h3></div>
+                                                <div class="panel-body">
+                                                        </br>
+                                                        <form ng-submit="UploadFilesTwo()">
+                                                                <div class="row">
+                                                                        <div class="col-md-6">
+                                                                                <h5>genome file</h5>
+                                                                                <input type="file" ng-file-select="onFileThreeSelect($files)" accept=".txt, .gbk, .fa, .fasta, .fastq, .map, .mapC" required>						
+                                                                        </div>
+                                                                </div>
+                                                                </br>
+                                                                <div class="row">
+                                                                        <div class="col-md-12 text-center">
+                                                                                <button class="btn btn-primary" type="submit">Find</button>
+                                                                        </div>
+                                                                </div>
+                                                        </form>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+            <div id="datatype" class="tab-pane fade">
+                <h3>Genome Data Type</h3>
+                <p>Choose a genome file and we will find the genome data type of that file.</p>
+                <!--file type analyzation-->
+                <div>
+                        <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><h3 class="text-center">Genome Data Type</h3></div>
+                                                <div class="panel-body">
+                                                        </br>
+                                                        <form ng-submit="AnalyzeFile()">
+                                                                <div class="row">
+                                                                        <div class="col-md-6">
+                                                                                <h5>genome file</h5>
+                                                                                <input type="file" ng-file-select="analyzeFile($files)" accept=".txt, .gbk, .fa, .fasta, .fastq, .map, .mapC" required>
+                                                                        </div>
+                                                                </div>
+                                                                </br>
+                                                                <div class="row">
+                                                                        <div class="col-md-12 text-center">
+                                                                                <button class="btn btn-primary" type="submit">Analyze</button>
+                                                                        </div>
+                                                                </div>
+                                                        </form>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+            <div id="probes" class="tab-pane fade">
+                <h3>Genome Probes</h3>
+                <p>Choose a genome file and a bash file containing genome sequences to look for in the genome file. 
+                   We will find which of those genome sequences are present or not in the genome file, how many times are present, and in which lines
+                   they are located.</p>
+                <!--find genome probes-->
+                <div>
+                        <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><h3 class="text-center">Genome Probes</h3></div>
+                                                <div class="panel-body">
+                                                        </br>
+                                                        <form ng-submit="FindProbes()">
+                                                                <div class="row">
+                                                                        <div class="col-md-6">
+                                                                                <h5>genome file</h5>
+                                                                                <input type="file" ng-file-select="theProbesFile($files)" accept=".txt, .gbk, .fa, .fasta, .fastq, .map, .mapC" required>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                                <h5>bash file</h5>
+                                                                                <input type="file" ng-file-select="theBashFile($files)" accept=".txt" required>
+                                                                        </div>
+                                                                </div>
+                                                                </br>
+                                                                <div class="row">
+                                                                        <div class="col-md-12 text-center">
+                                                                                <button class="btn btn-primary" type="submit">Find</button>
+                                                                        </div>
+                                                                </div>
+                                                        </form>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+            <div id="differences" class="tab-pane fade">
+                <h3>Genome Differences</h3>
+                <p>Choose a genome file 1 and a genome file 2. We will find what is contained in file 1 that is not contained in file 2 and vice-versa.</p>
+                <!--find differences-->
+                <div>
+                        <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><h3 class="text-center">Genome Differences</h3></div>
+                                                <div class="panel-body">                                                     
+                                                        </br>
+                                                        <form ng-submit="FindDifferences()">
+                                                                <div class="row">
+                                                                        <div class="col-md-6">
+                                                                                <h5>genome file 1</h5>
+                                                                                <input type="file" ng-file-select="onFileOneSelect($files)" accept=".txt, .gbk, .fa, .fasta, .fastq, .map, .mapC" required>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                                <h5>genome file 2</h5>
+                                                                                <input type="file" ng-file-select="onFileTwoSelect($files)" accept=".txt, .gbk, .fa, .fasta, .fastq, .map, .mapC" required>
+                                                                        </div>
+                                                                </div>
+                                                                </br>
+                                                                <div class="row">
+                                                                        <div class="col-md-12 text-center">
+                                                                                <button class="btn btn-primary" type="submit">Find</button>
+                                                                        </div>
+                                                                </div>
+                                                        </form>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+</div>
+

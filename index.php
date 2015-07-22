@@ -37,35 +37,37 @@
 			<!-- Collect the navigation links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#/home">Home</a></li>
-					<li><a href="#/home">Help</a></li>
-					<li><a href="#/home">About</a></li>
-					<li><a href="#/contact">Contact</a></li>
+				        <li><a href="#/home">Home</a></li>
+					<li><a href="#/help">Help</a></li>
+					<li><a href="#/about">About</a></li>
+					<li><a href="#/contact">Contact Us</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav><!--end of navigation bar-->
 
-	<!--all pages will be thrown here-->
+	<!--home, help, about, and contact us pages will be thrown here-->
 	<div id="main">
 	        <div ng-view></div>
 	</div>
 	
 	<!-- dna-image-section -->
-	<div class="row">
-		<div class="col-md-12">
+        <div class="dna-img">
+                <div class="row">
+                    <div class="col-md-12">
 			<center>
-				<img src="Images/dna1.png" alt="dna-image" style="width:100%;height:330px;padding-top: 30px;">
+                            <img src="Images/dna1.png" alt="dna-image" style="width:100%; height:330px; padding-top:30px;">
 			</center>  
-		</div>
-	</div>
+                    </div>
+                </div>
+        </div>
   
 	<!-- footer -section -->
 	<div class="row">
 		<div class="col-md-1"></div>
 			<div class="col-md-10">
-					<p class="navbar-text pull-left">Computing and Information Sciences</p>
-					<p class="navbar-text pull-right"><span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2009-2015 Florida International University</p>
+					<p class="navbar-text pull-left">Computing & Information Sciences - FIU</p>
+					<p class="navbar-text pull-right"><span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2009-2015 Michael Robinson</p>
 			</div>
 		<div class="col-md-1"></div> 
 	</div>

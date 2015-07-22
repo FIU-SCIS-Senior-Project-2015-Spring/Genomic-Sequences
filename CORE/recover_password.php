@@ -1,17 +1,11 @@
 <?php
-        //recoverd password in index.php
+        //recover password in home page
 
 	//import general functions
 	require "functions.php";
 	
-	//The information to connect to the database
-        $host = "127.0.0.1";
-        $user = "Dj_YAM";
-        $pass = "djyaminthemix28";
-        $db   = "genomepro";
-
-	//conect to the database
-	$connectedDB  = pg_connect("host=$host dbname=$db user=$user password=$pass") or die("Could not connect to server"); 
+	//conection to the database 
+	$connectedDB  = connectToDB(); 
 
 	//check input variables exist
 	if(isEmpty(@$_POST['email'])) die ("missing data.");	
@@ -47,10 +41,14 @@
 		$newuserResource = pg_query($connectedDB, $sql);
 		
 		//send email to user with new password to login
+                $subject = "Your password recovery";
                 $msg = "Hello " .$name. ",\n\n";
                 $msg = $msg."Your new password is: " .$generated_password."\n\n";
                 $msg = $msg." -GenomePro Team";
-		mail($email,'Your password recovery', $msg);
+		
+                //send and email to the user with new password to log in, needs to be changed when upload
+                //to the server
+                email($email, $name, $subject, $msg);
 
 		//return sent to the client
 		returnValue("Sent.");

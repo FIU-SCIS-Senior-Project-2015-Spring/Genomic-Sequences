@@ -1,0 +1,15 @@
+The following are sequences in file cmp1.txt that are not in file cmp2.txt:
+
+Sequence
+--------
+aaccc
+aaagg
+cccuu
+
+
+The following are sequences in file cmp2.txt that are not in file cmp1.txt:
+
+Sequence
+--------
+aaaac
+aaaag

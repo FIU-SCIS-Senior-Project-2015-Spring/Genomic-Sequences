@@ -1,10 +1,10 @@
 <?php
         
-        // importing the phpmailer functionality for localhost
-        require_once '/Applications/MAMP/htdocs/GenomePro/phpmailer/vendor/autoload.php';  
+        // importing the phpmailer functionality 
+        require_once '/var/www/html/phpmailer/vendor/autoload.php';  
         
 	//could be yordan, ubuntu or yohan
-	$OSys = 'yordan';
+	$OSys = 'ubuntu';
 
 	if ($OSys == 'ubuntu'){
 
@@ -12,33 +12,36 @@
 		$host = "127.0.0.1";
 		$user = "postgres";
 		$pass = "genomepro2015";
-		$db   = "genomepro";
+		$db = "genomepro";
 	
 		//php compiler
 		$phpComp = '/usr/bin/php';
-	
-	}else if($OSys == 'yordan'){
+
+		
+	}elseif($OSys == 'yohan'){
 
 		//The information to connect to the database
 		$host = "127.0.0.1";
 		$user = "postgres";
 		$pass = "1234";
-		$db   = "genomepro";
+		$db = "genomepro";
 	
 		//php compiler
-		$phpComp = '/Applications/MAMP/bin/php/php5.6.7/bin/php';	
-	
+		$phpComp = '/usr/bin/php';	
+
+		
 	}else{
 
 		//The information to connect to the database
 		$host = "127.0.0.1";
 		$user = "postgres";
 		$pass = "1234";
-		$db   = "genomepro";
+		$db = "genomepro";
 	
 		//php compiler
-		$phpComp = '/usr/bin/php';
-	
+		$phpComp = '/Applications/MAMP/bin/php/php5.6.7/bin/php';
+
+		
 	}
         
         function connectToDB(){
@@ -55,7 +58,7 @@
         
         //function to send emails to the admin using php mailer
         function emailAdmin($email, $name, $subject, $msg){
-            $adminEmail = "yalva054@fiu.edu";
+            $adminEmail = "michael.robinson@cs.fiu.edu";
             
 	    $from       = $email;       	// sender email
             $senderName = $name;               	// sender name
@@ -173,10 +176,10 @@
             else { // if file type is ok and size is ok, check for content
                 $myfile = fopen($file["tmp_name"], "r") or die("Unable to open file!"); // open the file to be read           
                 while(!feof($myfile)) {                     // until end-of-file check data content
-                    $line = trim(fgets($myfile));           // get a line
+                    $line = trim(fgets($myfile));           // get a line		
                     for($i = 0; $i < count($line); $i++) { 
                         $char = $line[$i];                  // check each character in each line
-                        if(($char == 'a') || ($char == 'c') || ($char == 'g') || ($char == "\r\n") || ($char == 't') || ($char == 'u')) {
+                        if(($char == 'a') || ($char == 'c') || ($char == 'g') || ($char == "\r\n") || ($char == 't') || ($char == 'u') || (ord($char) == 0)) {
                             continue;  // if valid data continue reading
                         }
                         else {  // otherwise display an error
@@ -204,7 +207,7 @@
                     $line = trim(fgets($myfile));           // get a line
                     for($i = 0; $i < count($line); $i++) { 
                         $char = $line[$i];                  // check each character in each line
-                        if(($char == 'a') || ($char == 'c') || ($char == 'g') || ($char == "\r\n") || ($char == 't') || ($char == 'u')) {
+                        if(($char == 'a') || ($char == 'c') || ($char == 'g') || ($char == "\r\n") || ($char == 't') || ($char == 'u')|| (ord($char) == 0)) {
                             continue;  // if valid data continue reading
                         }
                         else {  // otherwise display an error

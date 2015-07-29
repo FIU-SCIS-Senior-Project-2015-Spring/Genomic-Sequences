@@ -55,7 +55,7 @@
 	$call = $phpComp.' ../CProgram/probesCProgram.php '.$idOne.' '.$idTwo.' '.$idResult.' '.$id.' '.$email.' '.$fName.' '.$lName.' '.$probesFile["name"].' '.$bashFile["name"].' '.$file_result.'.results.txt &';           
         shell_exec($call);
      
-	returnValue("ok.");
+	returnValue("ok.".$call);
         
         
         // file types to check for input validation:

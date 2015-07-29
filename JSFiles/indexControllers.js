@@ -79,7 +79,7 @@ GenomePro.controller('home', function($scope, $http, $location, $timeout) {
 		{email:$scope.email,
 		password:$scope.password})
 		.success(function(json) {
-			 window.location.replace('http://localhost/GenomePro/'+json);
+			 window.location.replace('http://genomepro.cis.fiu.edu/'+json);
 		});
 	}
 

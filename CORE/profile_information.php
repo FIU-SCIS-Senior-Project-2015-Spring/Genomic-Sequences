@@ -7,7 +7,7 @@
 	$userData = $_SESSION;
         session_write_close();
 	if( is_null($userData)){
-		header('Location: http://localhost/GenomePro/index.php');
+		header('Location: http://genomepro.cis.fiu.edu/index.php');
 		exit();
 	}
 	//return sent to client	

@@ -27,5 +27,5 @@
 	}
 	
 	//redirect to home because user is already active
-	header('Location: http://localhost/GenomePro/index.php#/home/activated');
+	header('Location: http://genomepro.cis.fiu.edu/index.php#/home/activated');
 ?>

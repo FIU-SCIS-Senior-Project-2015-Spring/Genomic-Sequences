@@ -44,7 +44,7 @@
         $call = $phpComp.' ../CProgram/analyzeCProgram.php '.$idOne.' '.$idResult.' '.$id.' '.$email.' '.$fName.' '.$lName.' '.$file_an["name"].' '.$file_result.'.results.txt &';        
         shell_exec($call);
      
-	returnValue("ok.");
+	returnValue("ok.".$call);
 
 ?>
 

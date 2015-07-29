@@ -50,7 +50,7 @@
         $subject = "New Account Creation";
 	$msg = "Hello " .$fullName. ",\n\n";
         $msg = $msg."FIU genome pro has created an account for you. Click on the following link to activate the account:\n\n";
-        $msg = $msg."http://localhost/GenomePro/CORE/activate.php?use=".$ver_code."\n\n";
+        $msg = $msg."http://genomepro.cis.fiu.edu/CORE/activate.php?use=".$ver_code."\n\n";
         $msg = $msg." -GenomePro Team";
 	
         //send email to the user with php mailer, needs to be changed when upload to server

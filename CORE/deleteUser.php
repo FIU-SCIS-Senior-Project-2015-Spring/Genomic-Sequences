@@ -18,7 +18,7 @@
 	$userData = $_SESSION;
         session_write_close();
 	if( is_null($userData) ){
-		header('Location: http://localhost/GenomePro/index.php');
+		header('Location: http://genomepro.cis.fiu.edu/index.php');
 		exit();
 	}
 
@@ -34,7 +34,7 @@
         
 	//if user is not admin log off
 	if($userResultData[0] !='Admin'){
-		header('Location: http://localhost/GenomePro/index.php');
+		header('Location: http://genomepro.cis.fiu.edu/index.php');
 		exit();
 	}
 

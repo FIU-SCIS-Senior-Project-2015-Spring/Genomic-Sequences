@@ -113,7 +113,7 @@ GenomePro.controller('ControllerNavbar', function($scope, $location, $http) {
 		$http.post("CORE/logout.php",
 		{})
 		.success(function(json) {
-			 window.location.replace('http://localhost/GenomePro/index.php');
+			 window.location.replace('http://genomepro.cis.fiu.edu/index.php');
 		});
 	}
 });                                    

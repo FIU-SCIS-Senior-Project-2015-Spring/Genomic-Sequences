@@ -57,5 +57,5 @@
 	$call = $phpComp.' ../CProgram/differencesCProgram.php '.$idOne.' '.$idTwo.' '.$idResult.' '.$id.' '.$email.' '.$fName.' '.$lName.' '.$file1_name.' '.$file2_name.' '.$file_result.'.results.txt &';        
         shell_exec($call);
      
-	returnValue("ok.");
+	returnValue("ok.".$call);
 ?>

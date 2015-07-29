@@ -14,23 +14,6 @@ $m->Password   = 'genomepro2015';            // password
 $m->SMTPSecure = 'ssl';                      // secure type
 $m->Port = 465;                              // port used
 
-/*
-$m->From = 'yordan.alvarez30@gmail.com';  // email sending from
-$m->FromName = 'MySelf';                  
-$m->addReplyTo('yordan.alvarez30@gmail.com', 'Reply address'); // method to reply to
-$m->addAddress('yordan.alvarez30@gmail.com', 'Yordan Alvarez'); // send this to myself, can be used many times
 
-$m->Subject = 'Here is an email';  // email proporties
-$m->Body = 'This is the body';
-$m->AltBody = 'This is the body';
-
-// var_dump($m->send());  // will return true or false
-if($m->send())
-{
-	echo 'Email sent';
-}else{
-	echo $m->ErrorInfo;
-}
-*/
 
 

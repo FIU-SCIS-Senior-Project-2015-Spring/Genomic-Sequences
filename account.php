@@ -2,7 +2,7 @@
     //checking if user is logged in
     session_start();
     if( is_null($_SESSION)){
-        header('Location: http://localhost/GenomePro/index.php');
+        header('Location: http://genomepro.cis.fiu.edu/index.php');
         exit();
     }
     session_write_close();

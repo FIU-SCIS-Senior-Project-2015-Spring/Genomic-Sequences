@@ -44,5 +44,5 @@
 
         shell_exec($call);
   
-	returnValue("ok.");
+	returnValue("ok.".$call);
 ?>

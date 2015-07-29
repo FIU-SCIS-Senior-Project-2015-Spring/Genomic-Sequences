@@ -67,7 +67,7 @@ GenomePro.controller('ControllerNavbar', function($scope, $location, $http) {
 		$http.post("CORE/logout.php",
 		{})
 		.success(function(json) {
-			 window.location.replace('http://localhost/GenomePro/index.php');
+			 window.location.replace('http://genomepro.cis.fiu.edu/index.php');
 		});
 	}
 });                                    
@@ -189,7 +189,7 @@ GenomePro.controller('profile', function($scope, $http, $location, $timeout) {
         	
 });
 
-//--------------------------------------------------------------------------------------------------------
+//----------------------------------ADMIN----------------------------------------------------------------------
 //this controller is for the profile.html.
 GenomePro.controller('admin', function($scope, $http, $location, $timeout) {
 

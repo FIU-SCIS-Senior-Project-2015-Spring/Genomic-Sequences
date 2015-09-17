@@ -1,28 +1,13 @@
 <?php require('core/init.php'); 
 
-if(isLoggedIn()) {
-	/*
-	*	Instantiate classes! (Model)
-	*/
-    
-    $job = new Job;
-    
-	/*
-	*	Instantiate templates! (View)
-	*/
+if(!isLoggedIn()) redirect('index.php'); // if user isn't logged in, return to index page.
 
-    $template = new Template(TEMPLATES_DIR.HISTORY);
+//----------------------------- DEFAULT ACTION OF THE PAGE -----------------------------//
 
-	/*
-	*	Pass information to the template.
-	*/
-    
-    $template->jobs = $job->getAllJobs();
-    
-	/*
-	*	Output the template.
-	*/
-	echo $template;						
-} else {
-	redirect('index.php');
-}
+$job = new Job; // create new job model
+
+$template = new Template(TEMPLATES_DIR . HISTORY); // create new view
+
+$template->jobs = $job->getAllJobs(); // give view all jobs from user logged in
+
+echo $template; // print view

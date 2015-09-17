@@ -1,12 +1,14 @@
 <?php require('core/init.php');
 
-if(isset($_POST['do_login'])) {
-	$username = $_POST['username'];
-	$password = md5($_POST['password']);
-	
-	$user = new User;
-	
-	switch($user->login($username, $password)) {
+//------------------------------ USER CLICKS LOGIN BUTTON ------------------------------//
+
+if(isset($_POST['do_login'])) { // grab information from view (form)
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+
+    $user = new User;
+
+    switch($user->login($username, $password)) {
         case 0: // user logged in successfully
             redirect('index.php', 'You have been logged in!', 'success');
             break;
@@ -21,18 +23,8 @@ if(isset($_POST['do_login'])) {
     }
 }
 
-/*
-*	Instantiate templates! (View)
-*/
+//----------------------------- DEFAULT ACTION OF THE PAGE -----------------------------//
 
-$template = new Template(TEMPLATES_DIR.INDEX);
+$template = new Template(TEMPLATES_DIR . INDEX); // create new view
 
-/*
-*	Pass information to the template.
-*/
-
-
-/*
-*	Output the template.
-*/
-echo $template;					
+echo $template;	// print view

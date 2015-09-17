@@ -1,11 +1,9 @@
 <?php require('core/init.php');
 
+//----------------------------- USER CLICKS LOGOUT BUTTON ------------------------------//
+
 if(isset($_POST['do_logout'])) {
-	$user = new User;
-	
-	if($user->logout()) {
-		redirect('index.php', 'You have successfully logged out', 'success');
-	} else {
-		redirect('index.php');
-	}
+    $user = new User; // create new user model
+    
+    $user->logout(); // logout the user
 }

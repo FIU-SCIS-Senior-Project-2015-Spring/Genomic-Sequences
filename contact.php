@@ -1,6 +1,8 @@
 <?php require('core/init.php'); 
 
-if(isset($_POST['do_contact'])) {
+//--------------------------- USER CLICKS SEND MAIL BUTTON -----------------------------//
+
+if(isset($_POST['do_contact'])) { // grab information from view (form)
     $name = $_POST['name'];
     $email = $_POST['email'];
     $subject = $_POST['subject'];
@@ -13,23 +15,8 @@ if(isset($_POST['do_contact'])) {
     redirect('contact.php', 'Your message has been sent!', 'success');
 }
 
-/*
-*	Instantiate classes! (Model)
-*/
+//----------------------------- DEFAULT ACTION OF THE PAGE -----------------------------//
 
-/*
-*	Instantiate templates! (View)
-*/
+$template = new Template(TEMPLATES_DIR . CONTACT); // create new view
 
-$template = new Template(TEMPLATES_DIR.CONTACT);
-
-/*
-*	Pass information to the template.
-*/
-
-
-/*
-*	Output the template.
-*/
-
-echo $template;					
+echo $template; // print view

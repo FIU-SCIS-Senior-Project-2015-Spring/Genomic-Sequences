@@ -1,21 +1,7 @@
 <?php require('core/init.php'); 
 
-/*
-*	Instantiate classes! (Model)
-*/
+//----------------------------- DEFAULT ACTION OF THE PAGE -----------------------------//
 
-/*
-*	Instantiate templates! (View)
-*/
+$template = new Template(TEMPLATES_DIR . ABOUT); // create new view
 
-$template = new Template(TEMPLATES_DIR.ABOUT);
-
-/*
-*	Pass information to the template.
-*/
-
-
-/*
-*	Output the template.
-*/
-echo $template;					
+echo $template;	// print view

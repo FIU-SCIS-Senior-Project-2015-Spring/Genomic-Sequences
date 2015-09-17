@@ -39,7 +39,7 @@ if(isset($_POST['do_upload'])) {
 
 //----------------------------- DEFAULT ACTION OF THE PAGE -----------------------------//
 
-$template = new Template(TEMPLATES_DIR.TOOLS);
+$template = new Template(TEMPLATES_DIR . TOOLS);
 
 $template->tools = $tool->getAllTools();
 $template->files = $file->getAllFiles();

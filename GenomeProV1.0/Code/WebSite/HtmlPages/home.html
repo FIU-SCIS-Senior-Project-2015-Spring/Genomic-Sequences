@@ -1,0 +1,51 @@
+<!--home page shown in index.php-->
+<div class="row">
+	<center>  
+		<div class="col-md-1"></div>   <!-- Do Not delete, left blank Intentionally -->
+			<div class="col-md-5">
+                                <!--this is the log in section -->
+				<form class="form-signin" id="login-form" ng-submit="login()">
+					<h2 class="form-signin-heading">Please log in</h2>
+					<input ng-model= "email" type ="email" placeholder ="Email Address" class="form-control" required autofocus>
+					<input ng-model= "password" type ="password" placeholder ="Password" class="form-control" required>
+
+					<!--this is the forgot password link-->
+					<label>
+						<a href="#home" class="forget" ng-click="showForgotPassword()">Forgot your password?</a>
+					</label>
+
+					<button type="submit" class="btn btn-lg btn-primary btn-block">Log In</button>
+				</form>
+			</div> <!-- col-mid-5 end-->
+		
+			<!-- this is the registration section -->
+			<div class="col-md-5">
+				<form class="form-signin" ng-submit="register()">
+					<p id="registerParagraph">New to Genome Pro?<br>Register now to get your own profile</p>
+					<button class="btn btn-lg btn-primary btn-block" id="registerbnt" type="submit">Register</button>
+				</form>
+			</div>
+		<div class="col-md-1"></div>  <!-- Do Not delete, left blank Intentionally  -->
+	</center>
+</div> <!-- end of row-->
+
+<!-- modal below is hidden, only shown when forgot password is clicked -->
+<div class="modal fade forget-modal" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true" id="myForgetModalLabel">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Password Recovery</h4>
+			</div>
+                        <form ng-submit="recover()">
+			<div class="modal-body"> 
+                            <input type="email" ng-model="recoverEmail" class="form-control" autocomplete="off" placeholder="Type your email address" required>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button class="btn btn-default">Recover</button>
+			</div>
+                        </form>
+		</div> <!-- /.modal-content -->
+	</div> <!-- /.modal-dialog -->
+</div> <!-- /.modal fade -->

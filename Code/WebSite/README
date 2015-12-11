@@ -1,0 +1,471 @@
+##########################################################################
+#  NOTE FROM THE PROGRAMMER:											 #
+#																		 #
+#  Hello! If you're reading this, then that means you're a developer 	 #
+#  for GenomePro, possibly the third or fourth version of the program. 	 #
+#  This README will hopefully help you understand the code and thought 	 #
+#  process that went to creating GenomePro 2.0, and it will ease the 	 #
+#  burden of having to learn everything without understanding. In this 	 #
+#  guide, I am going to explain in detail a lot of the confusing 		 #
+#  aspects of the GenomePro program, and I will also provide diagrams 	 #
+#  to help understand some of the more discrete stuff. I'd like to 		 #
+#  apologize for any mispelling errors or confusing parts, and you're 	 #
+#  more than welcome to update this as time goes by but make sure to 	 #
+#  note the changes you've made in the revision section if it is 		 #
+#  something major. You can skip things like a spelling check if you'd   #
+#  like, but its best to document as much as possible.  				 #
+##########################################################################
+
+- REVISIONS --------------------------------------------------------------
+	> 11-29-2015					README CREATED.
+	> 11-30-2015					Diagrams for highcharts.js input created.					
+--------------------------------------------------------------------------
+
+- AUTHORS ----------------------------------------------------------------
+	> GenomePro 1.0				Yordan Alvarez,
+	> GenomePro 2.0				Guido Ruiz, Mardoqueu Mesquita
+--------------------------------------------------------------------------
+
+- README -----------------------------------------------------------------
+	> Summary			GenomePro is a program that aims to help students
+				        and professionals in the Biology field understand
+				        their DNA data. In other words, we provide the
+				        tools to split and analyze DNA in ways that can
+				        be used for multiple reasons. An analogy can be 
+				        made to what a scientific calculator is to a
+                        mathematician. As of current, we offer many tools,
+                        and we're expanding as more and more tools are
+                        requested by Biologists. The program is, as of
+                        2.0, based entirely on a web service, and it uses
+                        a single machine to process jobs submitted by
+                        users using C programs. These C programs are the
+                        heart of GenomePro, as they are what creates the
+                        results Bilogists see.
+												
+ > System Overview		> SERVER: As of GenomePro 2.0, the site is stored
+ 			            on a UBUNTU server, with Apache 2.0, and PHP
+				        installed as well as services like the CRONTAB
+				        which we use. No additional services or programs
+                        were installed onto the machine. As of the 
+                        revision date, the server is around 500 GB, and
+				        all the GenomePro 2.0 code is concentrated under
+                        the '/var/www/html/' directory. This directory
+				        is later on split in many other directores, and
+                        an outline of this can be found under the appendix
+				        named STRUCTURE.
+ 
+                        > DATABASE: We have a POSTGRES database which 
+				        stores information about the users, files, tools, 
+                        and the jobs they submit. More information, and 
+				        the architecture, can be found under the appendix 
+						named DATABASE. The information to access this
+				        database is stored under the config.php file. 
+				        We use POSTGRES for its reliability with large
+                        amounts of data, and also because it is backed
+				        up by the government as well as used by other
+                        organizations that deal with DNA. Fortunately,
+				        the structure of SQL querying is similar. You
+                        can access the postgres database using the
+				        command line, or you can visit a DBMS that is 
+				        hosted on the site for a more graphical approach.
+                        This DBMS can be found under: '.../phppgadmin',
+                        where everything before the '/' is the domain.
+                        As of GenomePro 2.0, this would equate to:
+                        'http://genomepro.cis.fiu.edu/phppgadmin'
+				        Ask the product manager for access to this DB,
+                        as it contains sensitive information.
+												
+				        > FORMAT: We're using PHP and HTML for this site,
+                        and we're not using any sort of framework. 
+				        No bootstrap, codeigniter, etc. as was requested
+				        by the product owner. Although these things do
+				        make the coding go by faster, it is HIGHLY ADVISED
+				        not to use them, as not only will you have to 
+				        remake GenomePro as a whole, but the product
+				        owner will not like it (assuming he hasn't 
+				        changed lol) and you will also miss the
+				        opportunity to learn PHP and HTML from barebones,
+				        which is a good skill to have if you don't 
+				        already have it. We're using a pseudo MVC format,
+				        as a true format would require a lot of different
+				        things be done with '.htaccess' files and honestly
+				        at that stage you might as well use a framework 
+				        since it can get messy. MVC stands for Model,
+				        View, and Controller, and it is a format that has
+				        remained adequate over the years. The controllers
+				        are what talk to the models and the views, views
+				        being the HTML and the visible side of the page,
+				        and models being the main computation or databse
+				        work. More information as to what exactly are the
+				        controllers, views, etc can be found under the 
+				        appendix named STRUCTURE.
+												
+				        > CRONTAB: We're currently using the system to, at
+				        each minute, look through the database in search
+				        of jobs that have not been completed and grab the
+				        jobs to process them. This script is called the
+				        'job_processor.php', and it is found under
+				        '/helpers/cron/' as of GenomePro 2.0. This script
+				        is ran by the system as a cronjob and can be 
+				        stopped by modifying the crontab. You can search
+				        online how to modify the crontab when you need
+				        to stop GenomePro from processing jobs or to do
+				        some testing. The 'job_processor' has a lot of
+				        information on it, and it handles each job
+				        differently. Do not be surprised if you have to
+				        change this script in order to incorporate a tool,
+				        as each tool usually does something unique and
+				        different than every other tool.
+												
+				        SUGGESTED APPROACH (Creating a Page): If you're
+				        creating a new page for GenomePro, it is suggested
+				        you first create a view in static HTML format. 
+				        Then, once it looks the way you want it to (with
+				        dummy values), create a controller that grabs this
+				        HTML page and prints it. From there, you can
+				        start adding variables that will be used by the
+				        view at the controller page, splitting hard logic
+				        to functions of models in the libraries or
+				        creating entirely new libraries themselves. 
+				        You can see the very minimum of a page by 
+				        viewing the 'about.php' controller and view. 
+				        These are named the same. The view is found under
+				        the 'templates/' directory as of GenomePro 2.0.
+				        This is a great example of what a static HTML site
+				        still following the MVC format looks like, as it
+				        lacks any model and the controller is as minimal
+				        as it can get. Once you understand these two,
+				        look into the 'tools.php' controller and view,
+				        as it is the most complicated. It uses multiple 
+				        models and communicates in a variety of scenarios.
+				        In short, use those two examples to guide you as
+				        you are creating a new page, be it a simply
+				        informative page like the about page, or a complex
+				        page like the tools page.
+												
+				        > SUGGESTED APPROACH (Creating a Tool): Make sure 
+				        any tool you create be done in C and compiled 
+				        into its own folder. These tools should run
+				        as efficiently as possible. Also assume that any
+				        input given to these tools be in absolute path.
+				        In other words, you won't get a simple 'myfile.txt'
+				        input, but a complex '/root/mydirectory/myfile.txt'
+				        Take this into consideration when creating these
+				        tools. Also, remember that there are two kinds of
+				        tools right now, namely, ones that take files
+				        as input directly towards the command line, and 
+				        ones that require a batch file of different files
+				        separated by spaces. Collaborate and decide how
+				        you want to do it, and look at examples of how 
+				        the other tools were done so that you follow a
+				        similar format.
+												
+				        > SUGGESTED APPROACH (Incorporating): One of the 
+				        most difficult parts is incorporating your tool with 
+				        the site. Not only do you need to add a respective
+				        row within the database that contains information
+				        about this tool, namely, where to find it and what
+				        it is called, but you also have to tell the site
+				        how to handle each tool respectively. In the
+				        'tools.php' controller, make sure the tool is
+				        submitted to its respective case scenario, and any
+				        preliminary stuff be done before submitting a
+				        job to the database. More information about the
+				        structure of the database and how jobs look like
+				        within the database can be found on the appendix
+				        as DATABASE. Also, once your tool can be sucessfully
+				        picked from the site and it creates a job entry,
+				        make sure the crontab php script that processes
+				        the jobs is able to handle the tool correctly and
+				        as intended for your particular need. This one 
+				        is called 'job_processor.php' as of now, and it 
+				        runs once every minute. It has locks so that it
+				        doesn't run twice if the first instance has yet
+				        to finish.
+												
+				        TLDR: You will probably need to change:
+                            1. database
+                            2. 'helpers/cron/tool_processor.php'
+                            3. 'tools.php'
+                            4. 'templates/tools.php'
+													
+> Final Notes			The concept of templates might be confusing at
+				        start, but it should be simple once you see how
+				        it works. Like in Java or any other programming
+				        language, the 'Template.php' is a class we 
+				        instantiate as an object that has variables
+				        and get/set methods. The constructor grabs
+				        HTML and stores it as a variable. This class
+				        has a print override method that prints the HTML
+				        giving it any variables it has to it. This is why
+				        we create a TEMPLATE object for each page, put
+				        variables onto it, then print the TEMPLATE object.
+				        Of course, the actual HTML page that gets printed
+				        expects these variables, as it should, and as such
+				        the INDEX page would not work on its own. This is
+				        why this whole architecture is a pesudo-mvc format.
+				        Re-read this and look at the 'about.php' controller
+				        and HTML page if this is still fuzzy, as this is
+				        a crucial concept to understand before modifying
+				        the GenomePro site.
+--------------------------------------------------------------------------
+
+- APPENDIX ---------------------------------------------------------------
+
+# STRUCTURE ################################################################################################################
+# Below you can find the structure that was used for the GenomePro site. Note that this is all subject to change as you    #
+# modify or create new stuff, and you should keep it updated in order to help the next developers. This is the structure   #
+# of the directory as of the last revision date.																		   #																			 #
+############################################################################################################################
+
+	> var
+			> www
+					> html
+							> avatars								 				-- user avatars
+									> *.jpg
+									> *.png
+									> ...
+							> config
+									> config.php 								    -- contains PHP definitions (global variables)
+							> core
+									> core.php									    -- in every PHP page. autoloads all libraries
+							> delivery											    -- FTP section. password protected user files
+									> user1
+											> index.php							    -- copied from helpers/ftp. makes viewing nicer
+											> uploads								-- files uploaded by user. some form of DNA
+													> u1_file1.*
+													> u1_file2.*
+													> ...
+											> results								-- result of tools arranged by folders
+													> u1_out1						-- the actual name of these folders contain job id
+															> *.*
+															> ...
+													> u1_out2
+															> *.*
+															> ...
+													> ...
+									> user2
+											> index.php
+											> uploads
+													> u2_file1.*
+													> u2_file2.*
+													> ...
+											> results
+													> u2_out1
+															> *.*
+															> ...
+													> u2_out2
+															> *.*
+															> ...
+													> ...
+										> ...
+								> helpers
+										> cron
+												> cron.helper.php			        -- locks crons from running over each other.
+												> db_cleaner.php			        -- runs once a day. cleans uncomfirmed users for now.
+												> file_validator.php	            -- validates uploaded files for validity.
+												> job_processor.php		            -- processes jobs from the database and stores results.
+										> ftp
+												> index.php 					    -- this gets copied when user created or password changed.
+										> mailer									-- PHPMailer stuff. only kept the bare minimum.
+												> *.*								-- we're using a GenomePro gmail to send emails.
+												> ...
+										> db_helper.php						        -- currently empty. Poor guy never got love.
+										> format_helper.php				            -- functions stored here that format dates, etc.
+										> system_helper.php				            -- super versatile guy. Moves files, creates FTP for users, and more.
+								> libraries										    -- the models of the site
+										> Database.php						        -- the only model that runs queries and returns results of queries.
+										> File.php								    -- contains functions to grab and set files from and to the database.
+										> Job.php									-- same as files, but with jobs instead.
+										> Template.php						        -- the pseudo-mvc guy. this is the controllers means to communicate with view.
+										> Tool.php								    -- same as files, but with tools instead.
+										> User.php								    -- same as files, but with users instead.
+										> Validator.php						        -- just checks up on formatting, like when registering, passwords match, etc.
+								> medRecs											-- it is unknown what this is. Created by product owner.
+										> .*.
+										> ...
+								> programs										    -- run of the mill location where C programs are stored.
+										> source									-- any source files, sample input, trashy stuff stored here.
+												> *.*
+												> ...
+										> extract									-- one of the programs GenomePro uses.
+												> extract.exe					    -- the actual executable. most programs follow this format.
+										> probes
+												> probes.exe
+										> ...
+								> templates										    -- HTML code for the site. Controllers pull from here onto TEMPLATE.
+										> css
+												> *.*
+												> ...
+										> data
+												> *.*
+												> ...
+										> fonts
+												> *.*
+												> ...
+										> ...
+										> about.php								    -- the views of the site.
+										> charts.php
+										> contact.php
+										> ...
+								> about.php										    -- although similar name, don't be confused! These are the controllers.
+								> charts.php
+								> contact.php
+								> ...
+									
+# DATABASE #################################################################################################################
+# Ye olde database of yore. Here you can find the structure of the database as of GenomePro 2.0. You can also see it live  #
+#	using the command line or visiting the DBMS. However, here I've explained some of the less known stuff. I've also      #
+#	included some of the queries I've used to modify and create new things.                                                #
+############################################################################################################################
+
+	Servers -> PostgreSQL -> genomepro2 -> website:
+
+	-- USERS TABLE -----------------------------------------------------------------------------------------------------------
+	
+	| user_id | integer | NOT NULL | PRIMARY | generated automatically by counter.
+	| username | character(30) | NOT NULL | user given field to sign in.
+	| password | character(40) | NOT NULL | md5 field.
+	| email | character(260) | NOT NULL | is confirmed before user can sign in.
+	| type | smallint | NOT NULL | 0 - unregistered, 1 - user, 2 - admin.
+	| about | text | there for fun.
+	| avatar | character(100) | the path of where the file is including the file name.
+	| serial | character(40) | generated string to confirm user. sent to email.
+	| firstname | character(25) | john.
+	| lastname | character(35) | smith.
+	| timestamp | timestamp | NOT NULL | when the user was created.
+	| ftp | character(100) | NOT NULL | ftp credentials to be used when creating an ftp server.
+	| temp | character(40) | good ol' temporary password for when you forget yours.
+	
+	CREATE TABLE users (
+    user_id integer NOT NULL,
+    username character(30) NOT NULL,
+    password character(40) NOT NULL,
+    email character(260) NOT NULL,
+    type smallint NOT NULL,
+    about text NOT NULL,
+    avatar character(100) NOT NULL,
+    serial character(40),
+    firstname character(25),
+    lastname character(25),
+    "timestamp" timestamp without time zone DEFAULT now() NOT NULL,
+    ftp character(100) NOT NULL,
+    temp character(40)
+	);
+	
+	-- FILES TABLE -----------------------------------------------------------------------------------------------------------
+	
+	| file_id	| integer	| NOT NULL | PRIMARY | generated automatically by counter.
+	| type_id	| integer	| NOT NULL | FOREIGN | primary key of type table.
+	| user_id	| integer	| NOT NULL | FOREIGN | primary key of user table.
+	| path | character(100) | NOT NULL | stores the path to the file (without the name), i.e. 'dir/'.
+	| name | character(100) | NOT NULL | stores the name of the file, i.e. 'myfile.txt'.
+
+	CREATE TABLE files (
+    file_id integer NOT NULL,
+    type_id integer NOT NULL,
+    user_id integer NOT NULL,
+    path character(100) NOT NULL,
+    name character(100) NOT NULL
+	);
+
+	-- TOOLS TABLE -----------------------------------------------------------------------------------------------------------
+	
+	| tool_id	| integer	| NOT NULL | PRIMARY | generated automatically by counter.
+	| name | character(50) | NOT NULL | name of the tool.
+	| description	| text | NOT NULL | description of the tool.
+	| type | smallint | NOT NULL | what type it is. Used to differentiate at the 'job_processor.php' level.
+	| exe_path | character(100) | NOT NULL | path to where the executable is stored.
+
+	CREATE TABLE tools (
+			tool_id integer NOT NULL,
+			name character(50) NOT NULL,
+			description text NOT NULL,
+			type smallint NOT NULL,
+			exe_path character(100) NOT NULL
+	);
+	
+	-- TYPES TABLE -----------------------------------------------------------------------------------------------------------
+
+	| type_id	| integer | PRIMARY | NOT NULL | generated automatically by counter.
+	| name | character(50) | NOT NULL | name of the type, i.e. DNA, RNA.
+	| description	| text | NOT NULL | description of that type. This is used as a foreign key for the FILES table.
+
+	CREATE TABLE types (
+    type_id integer NOT NULL,
+    name character(50) NOT NULL,
+    description text NOT NULL
+	);
+	
+	-- JOBS TABLE ------------------------------------------------------------------------------------------------------------
+	
+	| job_id	| integer |	NOT NULL | PRIMARY | generated automatically by counter.
+	| user_id	| integer |	NOT NULL | the user who submitted the job. Foreign key.
+	| tool_id	| integer |	NOT NULL | the tool that the job is using
+	| status | smallint | NOT NULL | the status of the job. 1 - pending, 2 - completed.
+	| timestamp	| timestamp |	NOT NULL | when the job was submitted if pending, completed if done.
+	| results | character(100) | path to where the results of the job are stored. Usually the user's FTP.
+	| args | character(100) | if the job has a tool that requres additional arguments, they're stored here.
+	| visible	| boolean | there's a clear function on the tools page to remove history. It only shows visible.
+	
+	CREATE TABLE jobs (
+    job_id integer NOT NULL,
+    user_id integer NOT NULL,
+    tool_id integer NOT NULL,
+    status smallint NOT NULL,
+    "timestamp" timestamp without time zone DEFAULT now() NOT NULL,
+    results character(100),
+    args character(100),
+    visible boolean DEFAULT true
+	);
+	
+	-- INVOLVES TABLE --------------------------------------------------------------------------------------------------------
+	
+	| job_id	| integer |	NOT NULL | a job can have many files involved
+	| file_id	| integer |	NOT NULL | a file can be part of many jobs
+	
+	CREATE TABLE involves (
+    job_id integer NOT NULL,
+    file_id integer NOT NULL
+	);
+	
+	-- SOME MORE QUERIES -----------------------------------------------------------------------------------------------------
+	
+	> updating: UPDATE FROM website.tools SET desc='Hello World' WHERE tool_id = 1;
+	> deleting: DELETE FROM website.tools WHERE tool_id = 1;
+	
+# EXTRAS ###################################################################################################################
+# Some other stuff that you can take a look at. We use these things here and there. 		                               #																		 #
+############################################################################################################################
+
+	------------------ Sample of a $_FILE() Array --------------------
+	|                                                                |
+	|  Array                                                         |
+	|  (                                                             |
+	|    [name] => facepalm.jpg                                      |
+	|    [type] => image/jpeg                                        |
+	|    [tmp_name] => /tmp/phpn3FmFr                                |
+	|    [error] => 0                                                |
+	|    [size] => 15476                                             |
+	|  )                                                             |
+	|                                                                |
+	--------------- Sample of what pathinfo() Returns ----------------
+	|                                                                |
+	|  $array = pathinfo('morning/directory/file.txt');              |
+	|                                                                |
+	|  Array                                                         |
+	|  (                                                             |
+	|    [dirname] => morning/directory                              |
+	|    [basename] => file.txt                                      |
+	|    [extension] => txt                                          |
+	|  )                                                             |
+	|                                                                |
+	------------------------------------------------------------------
+--------------------------------------------------------------------------
+
+- Conclusion -------------------------------------------------------------
+	> We hope this README has been helpful. You are more than welcome to 
+    read over it again and to study the code by looking through each file.
+    All of the files in this project hopefully contain good comments that
+    will assist in your understanding of this PHP project.
+--------------------------------------------------------------------------

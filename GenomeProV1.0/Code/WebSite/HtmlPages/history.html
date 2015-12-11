@@ -1,0 +1,196 @@
+<!--history page in account.php-->
+<div class="container">
+        </br>
+        <ul class="nav nav-tabs">
+            <li class="active"><a showtab=" " href="#repeated" ng-click="repeatedSequences()">Repeated Sequences</a></li>
+            <li><a showtab=" "  href="#datatype" ng-click="dataTypes()">Genome Data Type</a></li>
+            <li><a showtab=" " href="#probes" ng-click="genomeProbes()">Genome Probes</a></li>
+            <li><a showtab=" " href="#differences" ng-click="genomeDifferences()">Genome Differences</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="repeated" class="tab-pane fade in active">
+                <h3>Repeated Sequences History</h3>
+                <p>This table shows the history for the repeated sequences tool.</p>
+                <!--find repeated sequences-->
+                <div>
+                        <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading"><h3 class="text-center">Repeated Sequences <input type="text" ng-model="RSeq" class="pull-right h5" placeholder="filter"></h3></div>
+                                            <div class="panel-body" style="max-height: 420px;overflow-y: scroll;">
+                                                    </br>
+                                                    <table class="table table-striped">
+                                                            <tr>
+                                                                    <td>File&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('file1')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('file1')" ng-show="reverse"></span></td>
+                                                                    <td>Result&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('file2')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('file2')" ng-show="reverse"></span></td>
+                                                                    <td>Status&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('processed')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('processed')" ng-show="reverse"></span></td>
+                                                                    <td>Graph</td>
+                                                            </tr>
+                                                            <tr ng-repeat="items in repeatedSequencesHistory | filter : RSeq | orderBy: predicate : reverse">
+                                                                <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="downloadFile('../fileUploads/'+items.file1id,items.file1)">
+                                                                            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                                          </button>&nbsp;
+                                                                          {{items.file1}}</td>
+                                                                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-show="items.processed == 1" ng-click="downloadFile('../fileUploads/'+items.file2id,items.file2)">
+                                                                            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                                          </button>&nbsp;
+                                                                          {{items.file2}}</td>
+                                                                    <td><div ng-show="items.processed == 1">processed</div><div ng-show="items.processed == 0">In Progress</div></td>
+
+                                                                    <!--show graph calls to the controller to show graph-->
+                                                                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-show="items.processed == 1" ng-click="showGraph(items.file2id)">
+                                                                            <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                                                                        </button>
+                                                                    </td>
+                                                            </tr>
+                                                    </table>
+                                            </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+            <div id="datatype" class="tab-pane fade">
+                <h3>Genome Data Type History</h3>
+                <p>This table shows the history for the genome data type tool.</p>
+                <!--file type analyzation-->
+                <div>
+                        <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><h3 class="text-center">Genome Data Type <input type="text" ng-model="DType" class="pull-right h5" placeholder="filter"></h3></div>
+                                                <div class="panel-body" style="max-height: 420px;overflow-y: scroll;">
+                                                        </br>
+                                                        <table class="table table-striped">
+                                                                <tr>
+                                                                    <td>File&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('file1')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('file1')" ng-show="reverse"></span></td>
+                                                                    <td>Result&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('file2')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('file2')" ng-show="reverse"></span></td>
+                                                                    <td>Status&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('processed')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('processed')" ng-show="reverse"></span></td>
+                                                                </tr>
+                                                                <tr ng-repeat="items in dataTypesHistory | filter : DType | orderBy: predicate : reverse">
+                                                                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="downloadFile('../fileUploads/'+items.file1id,items.file1)">
+                                                                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                                              </button>&nbsp;
+                                                                              {{items.file1}}</td>
+                                                                        <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-show="items.processed == 1" ng-click="downloadFile('../fileUploads/'+items.file2id,items.file2)">
+                                                                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                                              </button>&nbsp;
+                                                                              {{items.file2}}</td>
+                                                                        <td><div ng-show="items.processed == 1">processed</div><div ng-show="items.processed == 0">In Progress</div></td>
+                                                                </tr>
+                                                        </table>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+            <div id="probes" class="tab-pane fade">
+                <h3>Genome Probes History</h3>
+                <p>This table shows the history for the genome probes tool.</p>
+                <!--find genome probes-->
+                <div>
+                        <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><h3 class="text-center">Genome Probes <input type="text" ng-model="GProbe" class="pull-right h5" placeholder="filter"></h3></div>
+                                                <div class="panel-body" style="max-height: 420px;overflow-y: scroll;">
+                                                        </br>
+                                                        <table class="table table-striped">
+                                                                <tr>
+                                                                    <td>File&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('file1')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('file1')" ng-show="reverse"></span></td>
+                                                                    <td>Bash&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('file2')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('file2')" ng-show="reverse"></span></td>
+                                                                    <td>Result&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('file3')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('file3')" ng-show="reverse"></span></td>
+                                                                    <td>Status&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('processed')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('processed')" ng-show="reverse"></span></td>
+                                                                </tr>
+                                                                <tr ng-repeat="items in probesHistory | filter : GProbe | orderBy: predicate : reverse">
+                                                                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="downloadFile('../fileUploads/'+items.file1id,items.file1)">
+                                                                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                                              </button>&nbsp;
+                                                                              {{items.file1}}</td>
+                                                                        <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="downloadFile('../fileUploads/'+items.file2id,items.file2)">
+                                                                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                                              </button>&nbsp;
+                                                                              {{items.file2}}</td>
+                                                                        <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-show="items.processed == 1" ng-click="downloadFile('../fileUploads/'+items.file3id,items.file3)">
+                                                                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                                              </button>&nbsp;
+                                                                              {{items.file3}}</td>
+                                                                        <td><div ng-show="items.processed == 1">processed</div><div ng-show="items.processed == 0">In Progress</div></td>
+                                                                </tr>
+                                                        </table>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+            <div id="differences" class="tab-pane fade">
+                <h3>Genome Differences History</h3>
+                <p>This table shows the history for the genome differences tool.</p>
+                <!--find genome differences-->
+                <div>
+                        <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><h3 class="text-center">Genome Differences <input type="text" ng-model="PData" class="pull-right h5" placeholder="filter"></h3></div>
+                                                <div class="panel-body" style="max-height: 420px;overflow-y: scroll;">
+                                                        </br>
+                                                        <table class="table table-striped">
+                                                                <tr>
+                                                                    <td>File 1&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('file1')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('file1')" ng-show="reverse"></span></td>
+                                                                    <td>File 2&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('file2')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('file2')" ng-show="reverse"></span></td>
+                                                                    <td>Result&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('file3')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('file3')" ng-show="reverse"></span></td>
+                                                                    <td>Status&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-click="order('processed')" ng-show="!reverse"></span><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"ng-click="order('processed')" ng-show="reverse"></span></td>
+                                                                </tr>
+                                                                <tr ng-repeat="items in differencesDataHistory | filter : PData | orderBy: predicate : reverse">
+                                                                    <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="downloadFile('../fileUploads/'+items.file1id,items.file1)">
+                                                                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                                              </button>&nbsp;
+                                                                              {{items.file1}}</td>
+                                                                        <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-click="downloadFile('../fileUploads/'+items.file2id,items.file2)">
+                                                                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                                              </button>&nbsp;
+                                                                              {{items.file2}}</td>
+                                                                        <td><button type="button" class="btn btn-default" aria-label="Left Align" ng-show="items.processed == 1" ng-click="downloadFile('../fileUploads/'+items.file3id,items.file3)">
+                                                                                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                                                              </button>&nbsp;
+                                                                              {{items.file3}}</td>
+                                                                        <td><div ng-show="items.processed == 1">processed</div><div ng-show="items.processed == 0">In Progress</div></td>
+                                                                </tr>
+                                                        </table>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- to display graph -->
+<div class="modal fade" id="showGraph">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">Graph</h4>
+                        </div>
+                        <div class="modal-body">
+                               <!--create the graph-->
+                                <div ac-chart="chartTypeBar" ac-data="dataGraphBar" ac-config="configGraphBar" id="chartBar" class="chart"></div>
+                                Legend
+                                <table width="100%" align="center">
+                                        <tr>
+                                                <td width="50%" valign="top"><li ng-repeat="item in dataGraphBar.series" ng-if="$index < (dataGraphBar.series.length/2)" style="color:{{colorsChartsBar[$index]}}; list-style-type: none"><span style="font-size:15px">&#9632;</span>&nbsp;<small><span style="color:black">{{item}}-[{{dataGraphBar.data[0].y[$index]}}]</span></small></li></td>
+                                                <td width="50%" valign="top"><li ng-repeat="item in dataGraphBar.series" ng-if="$index >= (dataGraphBar.series.length/2)" style="color:{{colorsChartsBar[$index]}}; list-style-type: none"><span style="font-size:15px">&#9632;</span>&nbsp;<small><span style="color:black">{{item}}-[{{dataGraphBar.data[0].y[$index]}}]</span></small></li></td>
+                                        </tr>
+                                </table>
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->	
